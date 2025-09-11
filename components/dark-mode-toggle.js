@@ -16,7 +16,7 @@ function DarkModeButton({ defaultMode }) {
     )
 }
 
-export default function DarkModeToggle({ defaultMode = 'light' }) {
+export default function DarkModeToggle({ defaultMode = 'dark' }) {
     return (
         <CookiesProvider>
             <DarkModeButton defaultMode={defaultMode} />
