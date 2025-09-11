@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+export default {
     darkMode: 'class',
     content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
     theme: {
@@ -10,5 +11,8 @@ module.exports = {
             },
         },
     },
+    safelist: [
+        'dark', // Ensures the 'dark' class is always included
+    ],
     plugins: [require('@tailwindcss/forms')],
 }
