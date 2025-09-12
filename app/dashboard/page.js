@@ -9,9 +9,7 @@ import { variants, sizes } from '@/lib/variants'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function Page() {
-    const client = createClient()
-
-    console.log(await (await client).from('transactions').select())
+    const client = await createClient()
 
     return (
         <>
