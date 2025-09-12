@@ -31,6 +31,22 @@
       "description": "Rent",
       "category": "Housing",
       "created_at": "2024-05-10T23:00:00"
+    },
+    {
+      "type": "Expense",
+      "category": "Health",
+      "amount": 45,
+      "description": "Drugs",
+      "created_at": "2025-04-23T00:00:00",
+      "id": 5
+    },
+    {
+      "type": "Investment",
+      "category": "Education",
+      "amount": 40,
+      "description": "Udemy cources",
+      "created_at": "2025-05-05T00:00:00",
+      "id": 6
     }
   ],
   "trends": [
