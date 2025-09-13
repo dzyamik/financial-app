@@ -1,28 +1,12 @@
+'use client'
+
 import Separator from '@/components/separator'
 import TransactionItem from '@/components/transaction-item'
 import TransactionSummaryItem from '@/components/transaction-summary-item'
-import { createClient } from '@/lib/supabase/server'
+import { groupAndSumTransactionsByDate } from '@/lib/utils'
 
-const groupAndSumTransactionsByDate = (transactions) => {
-    const grouped = {}
-    for (const transaction of transactions) {
-        const date = transaction.created_at.split('T')[0]
-        if (!grouped[date]) {
-            grouped[date] = { transactions: [], amount: 0 }
-        }
-        grouped[date].transactions.push(transaction)
-        const amount = transaction.type === 'Expense' ? -transaction.amount : transaction.amount
-        grouped[date].amount += amount
-    }
-
-    return grouped
-}
-
-export default async function TransactionList() {
-    const supabase = createClient()
-    const { data: transactions, error } = await (await supabase).from('transactions').select('*').order('created_at', { ascending: false })
-
-    const grouped = groupAndSumTransactionsByDate(transactions)
+export default function TransactionList({ initialTransactions }) {
+    const grouped = groupAndSumTransactionsByDate(initialTransactions)
 
     return (
         <div className="space-y-8">
