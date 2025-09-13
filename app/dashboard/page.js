@@ -8,19 +8,25 @@ import { PlusCircle } from 'lucide-react'
 import { variants, sizes } from '@/lib/variants'
 import { ErrorBoundary } from 'react-error-boundary'
 import { types } from '@/lib/consts'
+import Range from './components/range'
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
+    const range = (await searchParams)?.range ?? 'last30days'
+
     return (
         <>
-            <section className="mb-8">
+            <section className="mb-8 flex justify-between items-center">
                 <h1 className="text-4xl font-semibold">Summary</h1>
+                <aside>
+                    <Range />
+                </aside>
             </section>
 
             <section className="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {types.map((type) => (
                     <ErrorBoundary key={type} fallback={<div className="text-red-500">Cannot fetch {type} trend data</div>}>
                         <Suspense fallback={<TrendFallback />}>
-                            <Trend type={type} />
+                            <Trend type={type} range={range} />
                         </Suspense>
                     </ErrorBoundary>
                 ))}
