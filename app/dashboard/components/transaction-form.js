@@ -34,17 +34,7 @@ export default function TransactionForm(props) {
         setLastError()
         try {
             await createTransaction(data)
-            // await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         ...data,
-            //         created_at: `${data.created_at}T00:00:00`,
-            //     }),
-            // })
-            // await purgeTransactionListCache()
+
             router.push('/dashboard')
         } catch (error) {
             setLastError(error)
@@ -91,7 +81,7 @@ export default function TransactionForm(props) {
                 </div>
             </div>
 
-            <div className="flex justify-betweenitems-center">
+            <div className="flex justify-between items-center">
                 <div>{lastError && <FormError error={lastError} />}</div>
                 <Button type="submit" disabled={isSaving}>
                     Save
