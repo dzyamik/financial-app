@@ -12,17 +12,15 @@ import { useState } from 'react'
 export default function TransactionList({ range, initialTransactions }) {
     const LIMIT = 10
     const [transactions, setTransactions] = useState(initialTransactions)
-    const [offset, setOffset] = useState(initialTransactions.length)
     const [buttonHidden, setButtonHidden] = useState(initialTransactions.length < LIMIT)
     const [loading, setLoading] = useState(false)
     const grouped = groupAndSumTransactionsByDate(transactions)
 
-    const handleClick = async (e) => {
+    const handleClick = async () => {
         setLoading(true)
         try {
-            const nextTransactions = await fetchTransaction(range, offset, LIMIT)
+            const nextTransactions = await fetchTransaction(range, transactions.length, LIMIT)
             setButtonHidden(nextTransactions.length < LIMIT)
-            setOffset((prevValue) => prevValue + LIMIT)
             setTransactions((prevTransactions) => [...prevTransactions, ...nextTransactions])
         } finally {
             setLoading(false)
