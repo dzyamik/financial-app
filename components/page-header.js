@@ -28,7 +28,7 @@ export default async function PageHeader({ className }) {
                 {user && (
                     <Link href="/dashboard/settings" className={`${variants['ghost']} ${sizes['sm']} flex items-center space-x-1`}>
                         <Avatar />
-                        <span>{user?.email}</span>
+                        <span>{user?.user_metadata?.fullName ?? user?.email}</span>
                     </Link>
                 )}
                 {user && <SignOutButton />}
